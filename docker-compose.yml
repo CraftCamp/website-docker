@@ -1,0 +1,67 @@
+version: "3"
+networks:
+    developtech:
+        driver: bridge
+
+services:
+    website:
+        container_name: developtech_website
+        build: applications/website
+        image: developtech/website
+        depends_on:
+            - mysql
+        env_file:
+            - developtech.env
+        volumes:
+            - "./volumes/apps:/srv/apps"
+            - "./volumes/logs/game:/srv/logs"
+        networks:
+            developtech:
+
+    phpmyadmin:
+        container_name: developtech_phpmyadmin
+        image: nazarpc/phpmyadmin
+        environment:
+            SESSION_TIMEOUT: 86400
+        networks:
+            developtech:
+        ports:
+            - "8082:80"
+
+    # MYSQL Database
+    mysql:
+        container_name: developtech_mysql
+        build: mysql
+        image: developtech/mysql
+        env_file:
+            - developtech.env
+        networks:
+            developtech:
+        ports:
+            - "33306:3306"
+        volumes:
+            # mysql
+            - "./volumes/mysql:/var/lib/mysql"
+
+    # Nginx webserver
+    nginx:
+        container_name: developtech_nginx
+        build: nginx
+        image: developtech/nginx
+        depends_on:
+            - website
+        env_file:
+            - developtech.env
+        extra_hosts:
+            - "local.developtech.fr:127.0.0.1"
+        volumes:
+            # applications
+            - "./volumes/apps:/srv/apps"
+            # nginx
+            - "./volumes/html:/usr/share/nginx/html"
+            - "./volumes/logs/nginx:/var/log/nginx"
+        networks:
+            - developtech
+        ports:
+            - "443:443"
+            - "80:80"

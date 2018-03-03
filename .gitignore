@@ -1,0 +1,8 @@
+volumes/apps/*
+volumes/mysql/*
+*.log
+!volumes/apps/.gitkeep
+!volumes/mysql/.gitkeep
+applications/official-website/archives/*
+!applications/official-website/archives/.gitkeep
+developtech.env
