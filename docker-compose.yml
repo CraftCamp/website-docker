@@ -54,10 +54,12 @@ services:
             - developtech.env
         extra_hosts:
             - "local.developtech.fr:127.0.0.1"
+            - "release.developtech.fr:127.0.0.1"
         volumes:
             # applications
             - "./volumes/apps:/srv/apps"
             # nginx
+            - "./volumes/ssl:/etc/letsencrypt"
             - "./volumes/html:/usr/share/nginx/html"
             - "./volumes/logs/nginx:/var/log/nginx"
         networks:
