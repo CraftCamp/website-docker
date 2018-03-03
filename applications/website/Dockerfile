@@ -4,7 +4,6 @@ MAINTAINER Axel Venet <kern046@gmail.com>
 ENV TIMEZONE=Europe/Paris
 
 COPY docker-entrypoint.sh /entrypoint.sh
-COPY archives/official_website.tar.gz /srv/archives/
 
 RUN apt-get update \
     && apt-get upgrade -y \
