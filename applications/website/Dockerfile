@@ -18,12 +18,6 @@ RUN apt-get update \
     && chmod +x phpunit-6.1.phar \
     && mv phpunit-6.1.phar /usr/bin/phpunit \
 
-    && curl -sL https://deb.nodesource.com/setup_7.x | bash - \
-    && apt-get install -yq nodejs build-essential \
-
-    && npm install -g npm \
-    && npm install -g gulp-cli \
-
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/bin/ --filename=composer \
     && php -r "unlink('composer-setup.php');" \
