@@ -5,4 +5,4 @@ volumes/mysql/*
 !volumes/mysql/.gitkeep
 applications/official-website/archives/*
 !applications/official-website/archives/.gitkeep
-developtech.env
+craftcamp.env

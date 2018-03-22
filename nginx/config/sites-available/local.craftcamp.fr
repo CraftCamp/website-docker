@@ -1,10 +1,10 @@
 server {
   listen 80;
 
-  server_name local.developtech.fr;
+  server_name local.craftcamp.fr;
 
-  access_log /var/log/nginx/developtech_website.access.log;
-  error_log /var/log/nginx/developtech_website.error.log;
+  access_log /var/log/nginx/craftcamp_website.access.log;
+  error_log /var/log/nginx/craftcamp_website.error.log;
 
   root /srv/apps/official-website/public;
 
@@ -14,7 +14,7 @@ server {
   }
 
   location ~ ^/(index|config)\.php(/|$) {
-      fastcgi_pass developtech_website:9000;
+      fastcgi_pass craftcamp_website:9000;
       fastcgi_split_path_info ^(.+\.php)(/.*)$;
       include fastcgi_params;
       fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;

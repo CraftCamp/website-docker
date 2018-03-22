@@ -2,7 +2,7 @@ server {
   listen 80;
   listen [::]:80;
 
-  server_name release.developtech.fr;
+  server_name release.craftcamp.fr;
 
   return 302 https://$server_name$request_uri;
 }
@@ -11,13 +11,13 @@ server {
   listen 443 ssl http2;
   listen [::]:443 ssl http2;
 
-  ssl_certificate /etc/letsencrypt/live/release.developtech.fr/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/release.developtech.fr/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/release.craftcamp.fr/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/release.craftcamp.fr/privkey.pem;
 
-  server_name release.developtech.fr;
+  server_name release.craftcamp.fr;
 
-  access_log /var/log/nginx/developtech_website.access.log;
-  error_log /var/log/nginx/developtech_website.error.log;
+  access_log /var/log/nginx/craftcamp_website.access.log;
+  error_log /var/log/nginx/craftcamp_website.error.log;
 
   root /srv/apps/official-website/public;
 
@@ -27,7 +27,7 @@ server {
   }
 
   location ~ ^/(index|config)\.php(/|$) {
-      fastcgi_pass developtech_website:9000;
+      fastcgi_pass craftcamp_website:9000;
       fastcgi_split_path_info ^(.+\.php)(/.*)$;
       include fastcgi_params;
       fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;

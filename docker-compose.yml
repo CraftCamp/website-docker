@@ -1,42 +1,42 @@
 version: "3"
 networks:
-    developtech:
+    craftcamp:
         driver: bridge
 
 services:
     website:
-        container_name: developtech_website
+        container_name: craftcamp_website
         build: applications/website
-        image: developtech/website
+        image: craftcamp/website
         depends_on:
             - mysql
         env_file:
-            - developtech.env
+            - craftcamp.env
         volumes:
             - "./volumes/apps:/srv/apps"
             - "./volumes/logs/game:/srv/logs"
         networks:
-            developtech:
+            craftcamp:
 
     phpmyadmin:
-        container_name: developtech_phpmyadmin
+        container_name: craftcamp_phpmyadmin
         image: nazarpc/phpmyadmin
         environment:
             SESSION_TIMEOUT: 86400
         networks:
-            developtech:
+            craftcamp:
         ports:
             - "8082:80"
 
     # MYSQL Database
     mysql:
-        container_name: developtech_mysql
+        container_name: craftcamp_mysql
         build: mysql
-        image: developtech/mysql
+        image: craftcamp/mysql
         env_file:
-            - developtech.env
+            - craftcamp.env
         networks:
-            developtech:
+            craftcamp:
         ports:
             - "33306:3306"
         volumes:
@@ -45,16 +45,16 @@ services:
 
     # Nginx webserver
     nginx:
-        container_name: developtech_nginx
+        container_name: craftcamp_nginx
         build: nginx
-        image: developtech/nginx
+        image: craftcamp/nginx
         depends_on:
             - website
         env_file:
-            - developtech.env
+            - craftcamp.env
         extra_hosts:
-            - "local.developtech.fr:127.0.0.1"
-            - "release.developtech.fr:127.0.0.1"
+            - "local.craftcamp.fr:127.0.0.1"
+            - "release.craftcamp.fr:127.0.0.1"
         volumes:
             # applications
             - "./volumes/apps:/srv/apps"
@@ -63,7 +63,7 @@ services:
             - "./volumes/html:/usr/share/nginx/html"
             - "./volumes/logs/nginx:/var/log/nginx"
         networks:
-            - developtech
+            - craftcamp
         ports:
             - "443:443"
             - "80:80"
