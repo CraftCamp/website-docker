@@ -9,6 +9,8 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y wget zip unzip git \
 
+    &&  usermod -u 1000 www-data \
+
     && docker-php-ext-install pdo pdo_mysql \
 
     && ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
