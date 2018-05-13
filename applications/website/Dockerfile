@@ -11,7 +11,7 @@ RUN apt-get update \
 
     &&  usermod -u 1000 www-data \
 
-    && docker-php-ext-install pdo pdo_mysql \
+    && docker-php-ext-install pdo pdo_mysql opcache \
 
     && ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
     && echo $TIMEZONE > /etc/timezone \
