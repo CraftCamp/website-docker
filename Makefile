@@ -4,7 +4,7 @@ prod-install: prod-up prod-status
 
 prod-upgrade:
 
-	docker pull developtech/website
+	docker pull craftcamp/website
 	docker-compose -f production.yml up -d game
 
 up:
@@ -25,7 +25,7 @@ prod-restart:
 
 run:
 
-	docker exec -it developtech_website /bin/bash
+	docker exec -it craftcamp_website /bin/bash
 
 stop:
 
@@ -63,7 +63,7 @@ build-website:
 	$(eval version = $(shell git -C volumes/apps/official-website describe --tags))
 	tar -C volumes/apps -cvzf applications/website/archives/official_website.tar.gz official-website --exclude .git --exclude *.log
 	docker-compose build website
-	docker tag developtech/website developtech/website:$(version)
-	docker tag developtech/website developtech/website:latest
-	docker push docker.io/developtech/website:$(version)
-	docker push docker.io/developtech/website:latest
+	docker tag craftcamp/website craftcamp/website:$(version)
+	docker tag craftcamp/website craftcamp/website:latest
+	docker push docker.io/craftcamp/website:$(version)
+	docker push docker.io/craftcamp/website:latest

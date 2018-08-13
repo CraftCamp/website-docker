@@ -16,7 +16,13 @@ services:
             - "./volumes/apps:/srv/apps"
             - "./volumes/logs/game:/srv/logs"
         networks:
-            craftcamp:
+            - craftcamp
+
+    scheduler:
+        container_name: craftcamp_scheduler
+        image: citadeltechnologies/scheduler
+        networks:
+            - craftcamp
 
     phpmyadmin:
         container_name: craftcamp_phpmyadmin
@@ -24,7 +30,7 @@ services:
         environment:
             SESSION_TIMEOUT: 86400
         networks:
-            craftcamp:
+            - craftcamp
         ports:
             - "8082:80"
 
@@ -36,7 +42,7 @@ services:
         env_file:
             - craftcamp.env
         networks:
-            craftcamp:
+            - craftcamp
         ports:
             - "33306:3306"
         volumes:
